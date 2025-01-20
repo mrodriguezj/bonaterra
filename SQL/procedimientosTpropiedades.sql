@@ -89,3 +89,15 @@ SET nombre_propiedad = p_nombre_propiedad,
 WHERE id_propiedad = p_id_propiedad;
 END //
 DELIMITER ;
+
+-- Consultar propiedades por ID version 2.0
+    DELIMITER //
+CREATE PROCEDURE LeerPropiedadPorId(
+    IN p_id_propiedad INT
+)
+BEGIN
+SELECT *
+FROM Propiedades
+WHERE id_propiedad = p_id_propiedad;
+END //
+DELIMITER ;
