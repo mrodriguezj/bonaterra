@@ -24,7 +24,7 @@
             <input type="number" step="0.01" class="form-control" id="dimensiones" name="dimensiones" required>
         </div>
         <div class="mb-3">
-            <label for="precioTotal" class="form-label">Precio Total (USD)</label>
+            <label for="precioTotal" class="form-label">Precio Total</label>
             <input type="number" step="0.01" class="form-control" id="precioTotal" name="precioTotal" required>
         </div>
         <div class="mb-3">
@@ -42,6 +42,35 @@
         <button type="submit" class="btn btn-primary">Agregar Propiedad</button>
     </form>
 </div>
+
+<!-- Modal de éxito -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Operación Exitosa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¡La propiedad se ha agregado exitosamente!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Mostrar el modal si ?success=1 está en la URL
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === '1') {
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        }
+    });
+</script>
 </body>
 </html>
