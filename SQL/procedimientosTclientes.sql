@@ -46,3 +46,19 @@ BEGIN
     DELETE FROM Clientes WHERE id_cliente = p_id_cliente;
 END //
 DELIMITER ;
+
+-- Crear un cliente 2.0
+
+    DELIMITER //
+CREATE PROCEDURE CrearCliente(
+    IN p_nombre VARCHAR(100),
+    IN p_email VARCHAR(150),
+    IN p_telefono VARCHAR(15),
+    IN p_direccion TEXT,
+    IN p_estado_cliente ENUM('activo', 'inactivo', 'moroso')
+)
+BEGIN
+INSERT INTO Clientes (nombre, email, telefono, direccion, estado_cliente)
+VALUES (p_nombre, p_email, p_telefono, p_direccion, p_estado_cliente);
+END //
+DELIMITER ;
