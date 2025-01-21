@@ -101,3 +101,17 @@ FROM Propiedades
 WHERE id_propiedad = p_id_propiedad;
 END //
 DELIMITER ;
+
+--Validar propiedades antes de hacer una venta
+DELIMITER //
+CREATE PROCEDURE ValidarPropiedad(
+    IN p_id_propiedad INT
+)
+BEGIN
+SELECT
+    id_propiedad,
+    disponibilidad
+FROM Propiedades
+WHERE id_propiedad = p_id_propiedad;
+END //
+DELIMITER ;

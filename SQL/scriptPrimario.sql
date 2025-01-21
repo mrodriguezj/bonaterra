@@ -105,3 +105,16 @@ CREATE TABLE Notificaciones (
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
     FOREIGN KEY (id_cuenta) REFERENCES CuentasPorCobrar(id_cuenta)
 );
+
+-- Tabla Venta de propiedades
+CREATE TABLE Ventas (
+    id_venta INT PRIMARY KEY AUTO_INCREMENT,       -- ID único de la venta
+    id_cliente INT NOT NULL,                       -- Cliente asociado a la venta
+    id_propiedad INT NOT NULL,                     -- Propiedad asociada a la venta
+    precio_total DECIMAL(12, 2) NOT NULL,          -- Precio total de la venta
+    fecha_venta DATE NOT NULL,                     -- Fecha de la venta
+    detalles TEXT,                                 -- Detalles adicionales (opcional)
+    estado_venta ENUM('activa', 'cancelada') DEFAULT 'activa', -- Estado de la venta
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
+    FOREIGN KEY (id_propiedad) REFERENCES Propiedades(id_propiedad)
+);
