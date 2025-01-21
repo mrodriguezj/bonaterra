@@ -1,6 +1,6 @@
 <?php
 // Cargar la configuración desde el archivo config.php
-$config = require __DIR__ . '/../../config/config.php';
+$config = require __DIR__ . '/../../config/configRemote.php';
 
 // Crear la conexión utilizando mysqli
 $conn = new mysqli(
