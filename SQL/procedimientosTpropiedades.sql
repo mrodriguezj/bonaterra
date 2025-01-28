@@ -133,3 +133,37 @@ INSERT INTO Propiedades (nombre_propiedad, ubicacion, dimensiones, precio_total,
 VALUES (p_nombre_propiedad, p_ubicacion, p_dimensiones, p_precio_total, p_disponibilidad, p_tipo_propiedad, p_descripcion);
 END //
 DELIMITER ;
+
+
+--Crear 200 registros rapidos
+DELIMITER //
+CREATE PROCEDURE InsertarPropiedades()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i <= 200 DO
+        INSERT INTO Propiedades (
+            nombre_propiedad,
+            ubicacion,
+            dimensiones,
+            precio_total,
+            disponibilidad,
+            tipo_propiedad,
+            fecha_registro
+        )
+        VALUES (
+            CONCAT('Lote ', i), -- Genera nombres como 'Propiedad 4', 'Propiedad 5', etc.
+            'Cancun',               -- Ubicación fija
+            0,                      -- Dimensiones fijas
+            1,                      -- Precio fijo
+            'disponible',           -- Disponibilidad fija
+            'regular',              -- Tipo de propiedad fija
+            NOW()                   -- Fecha de registro actual
+        );
+        SET i = i + 1;
+END WHILE;
+END //
+DELIMITER ;
+
+-- Llama al procedimiento para insertar los registros
+CALL InsertarPropiedades();
