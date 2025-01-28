@@ -44,6 +44,9 @@ CREATE TABLE Propiedades (
     descripcion TEXT
 );
 
+ALTER TABLE Propiedades
+ADD COLUMN tipo_propiedad ENUM('comercial', 'premium', 'regular') DEFAULT 'regular' AFTER disponibilidad;
+
 -- Tabla Cuentas por Cobrar
 CREATE TABLE CuentasPorCobrar (
     id_cuenta INT PRIMARY KEY AUTO_INCREMENT,

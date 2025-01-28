@@ -14,6 +14,7 @@ BEGIN
 END //
 DELIMITER ;
 
+
 -- Leer propiedades
 DELIMITER //
 CREATE PROCEDURE LeerPropiedades()
@@ -113,5 +114,22 @@ SELECT
     disponibilidad
 FROM Propiedades
 WHERE id_propiedad = p_id_propiedad;
+END //
+DELIMITER ;
+
+--Crear propiedades 2.0
+DELIMITER //
+CREATE PROCEDURE CrearPropiedad(
+    IN p_nombre_propiedad VARCHAR(100),
+    IN p_ubicacion TEXT,
+    IN p_dimensiones FLOAT,
+    IN p_precio_total DECIMAL(12, 2),
+    IN p_disponibilidad ENUM('disponible', 'vendida', 'reservada'),
+    IN p_tipo_propiedad ENUM('comercial', 'premium', 'regular'),
+    IN p_descripcion TEXT
+        )
+BEGIN
+INSERT INTO Propiedades (nombre_propiedad, ubicacion, dimensiones, precio_total, disponibilidad, tipo_propiedad, descripcion)
+VALUES (p_nombre_propiedad, p_ubicacion, p_dimensiones, p_precio_total, p_disponibilidad, p_tipo_propiedad, p_descripcion);
 END //
 DELIMITER ;
