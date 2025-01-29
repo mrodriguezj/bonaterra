@@ -29,3 +29,40 @@ CREATE TABLE cliente (
     telefono CHAR(10) NOT NULL
 );
 
+--Creación de la tabla de ventas
+CREATE TABLE ventas (
+    id_venta INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_lote INT UNSIGNED NOT NULL,
+    id_cliente INT UNSIGNED NOT NULL,
+    precio_venta DECIMAL(10,2) NOT NULL,
+    fecha_venta DATETIME NOT NULL DEFAULT NOW(),
+    tipo_pago ENUM('contado', 'financiamiento') NOT NULL,
+    FOREIGN KEY (id_lote) REFERENCES propiedades(id_lote),
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+);
+
+--Creación de la tabla de cobranza
+CREATE TABLE cuentas_por_cobrar (
+    id_cuenta INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT UNSIGNED NOT NULL,
+    id_lote INT UNSIGNED NOT NULL,
+    monto_pago DECIMAL(10,2) NOT NULL,
+    monto_pagado DECIMAL(10,2) DEFAULT 0.00,
+    fecha_pago DATE NOT NULL,
+    estado_pago ENUM('pendiente', 'pagado', 'vencido') DEFAULT 'pendiente',
+    FOREIGN KEY (id_venta) REFERENCES ventas(id_venta),
+    FOREIGN KEY (id_lote) REFERENCES propiedades(id_lote)
+);
+
+--Creación de la tabla de pagos realizados
+CREATE TABLE pagos_realizados (
+    id_pago INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_cuenta INT UNSIGNED NOT NULL,
+    monto_pagado DECIMAL(10,2) NOT NULL,
+    fecha_real_pago DATETIME NOT NULL DEFAULT NOW(),
+    fecha_pago_efectivo DATE NOT NULL,
+    metodo_pago ENUM('efectivo', 'transferencia', 'tarjeta', 'otro') NOT NULL,
+    folio_pago VARCHAR(50) DEFAULT NULL,
+    comentarios TEXT DEFAULT NULL,
+    FOREIGN KEY (id_cuenta) REFERENCES cuentas_por_cobrar(id_cuenta)
+);
