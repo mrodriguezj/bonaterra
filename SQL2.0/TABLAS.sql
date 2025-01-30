@@ -36,7 +36,7 @@ CREATE TABLE ventas (
     id_cliente INT UNSIGNED NOT NULL,
     precio_venta DECIMAL(10,2) NOT NULL,
     fecha_venta DATETIME NOT NULL DEFAULT NOW(),
-    tipo_pago ENUM('contado', 'financiamiento') NOT NULL,
+    tipo_pago ENUM('contado', 'enganche', 'mensualidad', 'anualidad') NOT NULL,
     FOREIGN KEY (id_lote) REFERENCES propiedades(id_lote),
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
@@ -61,7 +61,7 @@ CREATE TABLE pagos_realizados (
     monto_pagado DECIMAL(10,2) NOT NULL,
     fecha_real_pago DATETIME NOT NULL DEFAULT NOW(),
     fecha_pago_efectivo DATE NOT NULL,
-    metodo_pago ENUM('efectivo', 'transferencia', 'tarjeta', 'otro') NOT NULL,
+    metodo_pago ENUM('deposito', 'transferencia', 'efectivo') NOT NULL,
     folio_pago VARCHAR(50) DEFAULT NULL,
     comentarios TEXT DEFAULT NULL,
     FOREIGN KEY (id_cuenta) REFERENCES cuentas_por_cobrar(id_cuenta)
