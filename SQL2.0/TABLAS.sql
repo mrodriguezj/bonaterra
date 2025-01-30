@@ -66,3 +66,14 @@ CREATE TABLE pagos_realizados (
     comentarios TEXT DEFAULT NULL,
     FOREIGN KEY (id_cuenta) REFERENCES cuentas_por_cobrar(id_cuenta)
 );
+
+--Creación de la tabla de notificaciones
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    rol VARCHAR(50) CHECK (rol IN ('operativo', 'administrativo')),
+    activo BOOLEAN DEFAULT TRUE,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
